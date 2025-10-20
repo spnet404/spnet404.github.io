@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>YUUKI_1365のホームページ</title>
+  <style>
+    /* フォント: MS ゴシック優先 */
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "MS Gothic", "MS PGothic", "Helvetica", "Arial", sans-serif;
+      background: linear-gradient(#e8f6ff, #d6f0ff 40%, #cfeefe 100%);
+      color: #033042;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* 水滴っぽい模様（CSSのみ） */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.55) 0 6%, transparent 6.5%),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,0.45) 0 5%, transparent 5.5%),
+        radial-gradient(circle at 60% 70%, rgba(255,255,255,0.35) 0 4%, transparent 4.5%),
+        radial-gradient(circle at 30% 80%, rgba(255,255,255,0.30) 0 7%, transparent 7.5%);
+      background-repeat: no-repeat;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    /* 中央のカード */
+    .card {
+      width: min(880px, 94%);
+      margin: 48px auto;
+      padding: 22px;
+      background: linear-gradient(#ffffffcc, #f1fdffcc);
+      border: 3px solid rgba(0,60,90,0.08);
+      box-shadow: 0 6px 18px rgba(3,48,66,0.12);
+      border-radius: 12px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ヘッダー（2000年代風の光沢処理） */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .site-title {
+      font-size: 28px;
+      font-weight: bold;
+      padding: 8px 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(200,240,255,0.7));
+      border-radius: 8px;
+      border: 1px solid rgba(0,60,90,0.12);
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 6px 10px rgba(0,0,0,0.04);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    nav {
+      margin-left: auto;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,60,90,0.08);
+      background: linear-gradient(#e9fbff, #dff8ff);
+      margin-left: 8px;
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset;
+      color: #034b62;
+    }
+
+    nav a:hover { transform: translateY(-1px); }
+
+    /* セクション */
+    section { margin: 14px 0; }
+    h2 {
+      font-size: 18px;
+      margin: 8px 0 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed rgba(3,48,66,0.08);
+    }
+
+    p { line-height: 1.8; margin: 8px 0; }
+
+    /* 情報ブロック（レトロな枠） */
+    .info {
+      background: linear-gradient(#f7ffff, #eefcff);
+      border: 2px solid rgba(3,48,66,0.06);
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(3,48,66,0.03);
+      font-size: 14px;
+    }
+
+    /* フッター */
+    footer {
+      margin-top: 18px;
+      font-size: 12px;
+      color: rgba(3,48,66,0.6);
+      text-align: center;
+    }
+
+    /* レスポンシブで文字を小さめに */
+    @media (max-width:480px){
+      .site-title{ font-size:20px; }
+      .card{ padding:16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <header>
+      <div class="site-title">WELCOME</div>
+      <nav aria-label="ページ内ナビゲーション">
+        <a href="#about">自己紹介</a>
+        <a href="#interest">興味</a>
+        <a href="#contact">連絡先</a>
+      </nav>
+    </header>
+
+    <section id="about">
+      <h2>自己紹介</h2>
+      <div class="info">
+        <p>ご覧いただきありがとうございます。このページはYUUKI_1365が運営しています。</p>
+        <p>私は「過度なブラウザオタクのnote」を運営している高校生男子です。レトロなネット文化が大好きで、最近は個人サイト収集に励んでいます。ゆっくりしていってね！！</p>
+      </div>
+    </section>
+
+    <section id="interest">
+      <h2>興味・好きなもの</h2>
+      <div class="info">
+        <p>・ガジェット / ウェブデザイン（レトロ）<br>
+           ・ロシア文化 / 韓国文化<br>
+           ・スターバックス</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>連絡先</h2>
+      <div class="info">
+        <p>メール: yuuki1365@vivaldi.net<br>
+           Twitter: @yuuki_1365</p>
+      </div>
+    </section>
+
+    <footer>
+      <small>©yuuki_1365 All Right Reserved. 生成AIの支援を受けて作成</small>
+    </footer>
+  </main>
+</body>
+</html>
