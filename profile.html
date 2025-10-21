@@ -1,55 +1,86 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>プロフィール - spnet_404のホームページ</title>
-<style>
-body {
-  font-family: "MS Gothic", monospace;
-  background: linear-gradient(to bottom, #d0f0ff, #f8ffff);
-  color: #004060;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>プロフィール - spnet_404のホームページ</title>
+  <style>
+    :root{
+      --brand-color: #006080;
+      --bg-start: #d0f0ff;
+      --bg-end: #f8ffff;
+      --card-bg: rgba(255,255,255,0.95);
+      --max-width: 700px;
+      --gap: 16px;
+    }
 
-.container {
-  width: 500px;
-  margin: 40px auto;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid #a0d0e0;
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(160, 210, 240, 0.5);
-}
+    /* ベース */
+    html,body{height:100%;}
+    body {
+      font-family: "MS Gothic", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
+      color: #004060;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      line-height: 1.45;
+    }
 
-h1 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
+    .container {
+      width: calc(100% - 48px);
+      max-width: var(--max-width);
+      margin: 32px auto;
+      background: var(--card-bg);
+      border: 1px solid #a0d0e0;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 6px 18px rgba(160, 210, 240, 0.25);
+      box-sizing: border-box;
+      text-align: left;
+    }
 
-nav a {
-  display: inline-block;
-  margin: 0 10px;
-  color: #006080;
-  text-decoration: none;
-}
+    .container > * { margin: 0 0 var(--gap) 0; }
 
-nav a:hover {
-  text-decoration: underline;
-}
+    h1 { font-size: 1.4rem; color: #003348; margin-bottom: 6px; }
 
-table {
-  margin: 20px auto;
-  border-collapse: collapse;
-}
+  nav { margin: 0.5rem 0; text-align: center; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; align-items:center; }
 
-td {
-  padding: 6px 10px;
-  border-bottom: 1px dotted #80b0c0;
-  text-align: left;
-}
-</style>
+  nav a { display: inline-block; margin: 0 10px; color: var(--brand-color); text-decoration: none; font-weight:600; }
+    nav a + a::before{ content: " | "; color: #9fcbe0; margin-right: 10px; }
+    nav a:hover { text-decoration: underline; }
+
+    hr { border: none; border-top: 1px solid #d7eef6; margin: 12px 0; }
+
+    /* テーブルをレスポンシブに */
+    table { width: 100%; max-width: 640px; margin: 0 auto; border-collapse: collapse; }
+    td { padding: 8px 10px; border-bottom: 1px dotted #80b0c0; text-align: left; vertical-align: top; }
+
+    img, iframe { max-width: 100%; height: auto; display:block; }
+
+    /* スマホ向け */
+    @media (max-width: 767px){
+      :root{ --gap: 12px; }
+      .container{ width: calc(100% - 24px); margin: 16px auto; padding: 16px; border-radius: 10px; }
+  h1{ font-size: 1.15rem; }
+  /* ナビは横並びのまま折り返す */
+  nav{ gap:6px; }
+  nav a{ margin:0; }
+  body{ font-size:15px; }
+
+      /* テーブルはラベル/値を縦並びにする */
+      table, tbody, tr, td { display: block; width: 100%; }
+      td { border-bottom: none; padding: 6px 0; }
+      tr { border-bottom: 1px solid #e6f4fb; padding: 8px 0; }
+      td:first-child { font-weight:700; color:#003348; }
+    }
+
+    /* タブレット向け */
+    @media (min-width: 768px) and (max-width: 1023px){
+      .container{ padding:20px; }
+      h1{ font-size:1.3rem; }
+    }
+  </style>
 </head>
 <body>
 
