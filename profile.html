@@ -1,110 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>プロフィール - spnet_404のホームページ</title>
-  <style>
-    :root{
-      --brand-color: #006080;
-      --bg-start: #d0f0ff;
-      --bg-end: #f8ffff;
-      --card-bg: rgba(255,255,255,0.95);
-      --max-width: 700px;
-      --gap: 16px;
-    }
-
-    /* ベース */
-    html,body{height:100%;}
-    body {
-      font-family: "MS Gothic", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
-      background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
-      color: #004060;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      font-size: 16px;
-      line-height: 1.45;
-    }
-
-    .container {
-      width: calc(100% - 48px);
-      max-width: var(--max-width);
-      margin: 32px auto;
-      background: var(--card-bg);
-      border: 1px solid #a0d0e0;
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 6px 18px rgba(160, 210, 240, 0.25);
-      box-sizing: border-box;
-      text-align: left;
-    }
-
-    .container > * { margin: 0 0 var(--gap) 0; }
-
-    h1 { font-size: 1.4rem; color: #003348; margin-bottom: 6px; }
-
-  nav { margin: 0.5rem 0; text-align: center; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; align-items:center; }
-
-  nav a { display: inline-block; margin: 0 10px; color: var(--brand-color); text-decoration: none; font-weight:600; }
-    nav a + a::before{ content: " | "; color: #9fcbe0; margin-right: 10px; }
-    nav a:hover { text-decoration: underline; }
-
-    hr { border: none; border-top: 1px solid #d7eef6; margin: 12px 0; }
-
-    /* テーブルをレスポンシブに */
-    table { width: 100%; max-width: 640px; margin: 0 auto; border-collapse: collapse; }
-    td { padding: 8px 10px; border-bottom: 1px dotted #80b0c0; text-align: left; vertical-align: top; }
-
-    img, iframe { max-width: 100%; height: auto; display:block; }
-
-    /* スマホ向け */
-    @media (max-width: 767px){
-      :root{ --gap: 12px; }
-      .container{ width: calc(100% - 24px); margin: 16px auto; padding: 16px; border-radius: 10px; }
-  h1{ font-size: 1.15rem; }
-  /* ナビは横並びのまま折り返す */
-  nav{ gap:6px; }
-  nav a{ margin:0; }
-  body{ font-size:15px; }
-
-      /* テーブルはラベル/値を縦並びにする */
-      table, tbody, tr, td { display: block; width: 100%; }
-      td { border-bottom: none; padding: 6px 0; }
-      tr { border-bottom: 1px solid #e6f4fb; padding: 8px 0; }
-      td:first-child { font-weight:700; color:#003348; }
-    }
-
-    /* タブレット向け */
-    @media (min-width: 768px) and (max-width: 1023px){
-      .container{ padding:20px; }
-      h1{ font-size:1.3rem; }
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>プロフィール — spnet_404のホームページ</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="app">
+    <div class="container">
+      <aside class="sidebar card">
+        <div class="brand">
+          <div class="logo">Y</div>
+          <div>
+            <div class="site-title">spnet_404のホームページ</div>
+            <div class="site-sub">profile</div>
+          </div>
+        </div>
 
-<div class="container">
-  <h1>プロフィール</h1>
+        <nav class="nav">
+          <a href="index.html">トップ</a>
+          <a href="profile.html" class="active">プロフィール</a>
+          <a href="diary.html">日記</a>
+        </nav>
+      </aside>
 
-  <nav>
-    <a href="index.html">トップ</a> |
-    <a href="profile.html">プロフィール</a> |
-    <a href="diary.html">日記</a>
-  </nav>
-
-  <hr>
-
-  <table>
-    <tr><td><b>名前：</b></td><td>spnet_404</td></tr>
-    <tr><td><b>趣味：</b></td><td>レトロゲーム集め、風景写真、紅茶</td></tr>
-    <tr><td><b>好きなもの：</b></td><td>OnePlus、Vivaldi、ナナヲアカリ様</td></tr>
-    <tr><td><b>メール：</b></td><td>yuuki1365@vivaldi.net</td></tr>
-    <tr><td><b>ツイッター：</b></td><td>@yuuki_1365</td></tr>
-  </table>
-
-  <p>文系がなんやかんやサイトいじってます。よろしく</p>
+      <main class="main">
+        <section class="card">
+          <div class="profile-grid">
+            <div class="avatar">
+  <img src="images/profile.png" alt="spnet_404のアイコン">
 </div>
 
+            <div>
+              <h1>spnet_404</h1>
+              <p class="meta">男子高校生 / 兵庫県 / ウェブブラウザ好きの文系</p>
+
+              <h3 style="margin-top:14px">自己紹介</h3>
+              <p>物好きな文系がひたすら日記を書いています。プログラムとかは全くわかりませんが、GItHubコミュニティの皆さんよろしくお願いします。私は「過度なブラウザオタクのブログ」を運営しています。暇つぶしにお読みください</p>
+
+              <h3 style="margin-top:12px">リンク</h3>
+              <p class="meta">
+  <a href="https://twitter.com/yuuki_1365" target="_blank">Twitter</a> · 
+  <a href="https://note.com/yuuki5391" target="_blank">note</a>
+</p>
+
+
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>興味のある事</h2>
+          <ul style="color:var(--muted); margin:8px 0 0 18px">
+            <li>ウェブデザイン（レトロなもの）</li>
+            <li>AQUOS</li>
+            <li>ロシア文化・韓国語に興味あり</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </div>
 </body>
 </html>

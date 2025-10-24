@@ -1,122 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>spnet_404のホームページ</title>
-  <style>
-    :root{
-      --brand-color: #006080;
-      --bg-start: #d0f0ff;
-      --bg-end: #f8ffff;
-      --card-bg: rgba(255,255,255,0.95);
-      --max-width: 700px;
-      --gap: 16px;
-    }
-
-    /* ベース */
-    html,body{height:100%;}
-    body {
-      font-family: "MS Gothic", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
-      background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
-      color: #004060;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      font-size: 16px;
-      line-height: 1.45;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* コンテナは流動的にし、最大幅を指定 */
-    .container {
-      width: calc(100% - 48px);
-      max-width: var(--max-width);
-      margin: 32px auto;
-      background: var(--card-bg);
-      border: 1px solid #a0d0e0;
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 6px 18px rgba(160, 210, 240, 0.25);
-      box-sizing: border-box;
-      text-align: left;
-    }
-
-    .container > * { margin: 0 0 var(--gap) 0; }
-
-    h1 {
-      font-size: 1.4rem;
-      color: #003348;
-      margin-bottom: 6px;
-    }
-
-    .lead { font-size: 1rem; }
-
-    nav {
-      margin: 0.5rem 0;
-      text-align: center;
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    nav a {
-      display: inline-block;
-      margin: 0 10px;
-      color: var(--brand-color);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    nav a + a::before{ content: " | "; color: #9fcbe0; margin-right: 10px; }
-
-    nav a:hover { text-decoration: underline; }
-
-    hr { border: none; border-top: 1px solid #d7eef6; margin: 12px 0; }
-
-    /* 画像や埋め込みがあれば幅制御 */
-    img, iframe { max-width: 100%; height: auto; display:block; }
-
-    /* スマホ向け調整 */
-    @media (max-width: 767px){
-      :root{ --gap: 12px; }
-      .container{ width: calc(100% - 24px); margin: 16px auto; padding: 16px; border-radius: 10px; }
-      h1{ font-size: 1.15rem; }
-      .lead{ font-size: 0.95rem; }
-      /* ナビは常に横並び（折り返し）にする */
-      nav{ gap:6px; }
-      nav a{ margin:0; }
-      body{ font-size:15px; }
-    }
-
-    /* タブレット向け */
-    @media (min-width: 768px) and (max-width: 1023px){
-      .container{ padding:20px; }
-      h1{ font-size:1.3rem; }
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>spnet_404のホームページ — トップ</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="app">
+    <div class="container">
+      <aside class="sidebar card" aria-label="サイドバー">
+        <div class="brand">
+          <div class="logo">Y</div>
+          <div>
+            <div class="site-title">spnet_404のホームページ</div>
+            <div class="site-sub">ChatGPTって便利なんだな</div>
+          </div>
+        </div>
 
-<div class="container">
-  <h1>spnet_404のホームページへようこそ！</h1>
-  <p>ここはspnet_404の個人サイトです。<br>
-  ゆっくりしていってね！！</p>
+        <nav class="nav" role="navigation">
+          <a href="index.html" class="active">トップ</a>
+          <a href="profile.html">プロフィール</a>
+          <a href="diary.html">日記</a>
+        </nav>
 
-  <nav>
-    <a href="index.html">トップ</a> |
-    <a href="profile.html">プロフィール</a> |
-    <a href="diary.html">日記</a>
-  </nav>
+        <div style="margin-top:18px; font-size:13px; color:var(--muted)">
+          Tags<br/>
+          <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap">
+            <span class="btn" style="padding:6px 8px; font-size:12px">#お知らせ</span>
+          </div>
+        </div>
+      </aside>
 
-  <hr>
-  <p>最終更新日：2025/10/23</p>
-</div>
+      <main class="main">
+        <header class="header">
+          <div>
+            <div class="title">ようこそ 📝</div>
+            <div class="meta">文系が色々とサイトいじってます</div>
+          </div>
+          <div class="controls">
+            <button class="btn">新規ノート</button>
+            <button class="btn">検索</button>
+          </div>
+        </header>
 
+        <section class="card">
+          <h2>最近の更新</h2>
+          <div class="diary-list" style="margin-top:12px">
+            <article class="diary-item">
+              <div class="title">2025-10-23 — リニューアル以前のアーカイブ</div>
+              <div class="excerpt">それにしても急に寒くなったなあ。服装がちょうどいいの無いです笑</div>
+            </article>
+
+            <article class="diary-item">
+              <div class="title">2025-10-22 — リニューアル以前のアーカイブ</div>
+              <div class="excerpt">FC2ホームページから引っ越してきた私のホームページですが、なんかシンプルなホスティングサービス無いかなと思ったのと、技術者が集う場所で文系が日記更新するの面白いかなと思ってGitHubにやってきました。Gitとかマジ分からん・・・</div>           
+            </article>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>About</h2>
+          <p>ご覧いただきありがとうございます。このページはspnet_404が運営しています。ゆっくりしていってね！！</p>
+        </section>
+      </main>
+    </div>
+  </div>
 </body>
 </html>
-
-
