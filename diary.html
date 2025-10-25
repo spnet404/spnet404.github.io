@@ -37,6 +37,12 @@
             </div>
           </div>
 
+          <div style="margin-top:14px" id="diary-list" class="diary-list">
+            <!-- diary entries will be rendered here from diary.json -->
+          </div>
+
+          <!-- Fallback: keep original static content for users without JavaScript -->
+          <noscript>
           <div style="margin-top:14px" class="diary-list">
             <article class="diary-item">
               <div class="title">2025-10-26 — WordPress化について調べていた</div>
@@ -68,6 +74,30 @@
               <div class="excerpt">こんにちは！ホームページ開設してから早速リニューアル、元々私はFC2ホームページで似たようなことをやってました。よろしくお願いします</div>
             </article>
           </div>
+          </noscript>
+
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            var container = document.getElementById('diary-list');
+            if (!container) return;
+            fetch('diary.json')
+              .then(function (res) { return res.json(); })
+              .then(function (data) {
+                if (!data || !Array.isArray(data.entries)) return;
+                data.entries.forEach(function (e) {
+                  var article = document.createElement('article');
+                  article.className = 'diary-item';
+                  var inner = '' +
+                    '<div class="title">' + (e.date ? e.date + ' — ' : '') + (e.title || '') + '</div>' +
+                    '<div class="meta">' + (e.category ? 'カテゴリ: ' + e.category : '') + '</div>' +
+                    '<div class="excerpt">' + (e.excerpt || '') + '</div>';
+                  article.innerHTML = inner;
+                  container.appendChild(article);
+                });
+              })
+              .catch(function (err) { console.error('Failed to load diary.json', err); });
+          });
+          </script>
         </section>
 
         <section class="card">

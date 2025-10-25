@@ -36,7 +36,7 @@
         <header class="header">
           <div>
             <div class="title">ようこそ 📝</div>
-            <div class="meta">文系のひとりごと</div>
+            <div class="meta">文系が色々とサイトいじってます</div>
           </div>
           <div class="controls">
             <button class="btn">新規ノート</button>
@@ -46,6 +46,12 @@
 
         <section class="card">
           <h2>最近の更新</h2>
+          <div id="recent-diary-list" class="diary-list" style="margin-top:12px">
+            <!-- recent diary entries (max 2) will be rendered here from diary.json -->
+          </div>
+
+          <!-- Fallback: original static content for no-JS users -->
+          <noscript>
           <div class="diary-list" style="margin-top:12px">
             <article class="diary-item">
               <div class="title">2025-10-26 — WordPress化について調べていた</div>
@@ -54,9 +60,43 @@
 
             <article class="diary-item">
               <div class="title">2025-10-25 — インテリにあこがれている</div>
-              <div class="excerpt">「吾輩が猫である」の登場人物の生活に最近あこがれています。知識人が不真面目な事を真面目に議論しているのが知的で面白い</div>           
+              <div class="excerpt">「吾輩が猫である」の登場人物の生活に最近あこがれています。知識人が不真面目な事を真面目に議論しているのが知的で面白い</div>
             </article>
           </div>
+          </noscript>
+
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            var container = document.getElementById('recent-diary-list');
+            if (!container) return;
+            fetch('diary.json')
+              .then(function (res) { return res.json(); })
+              .then(function (data) {
+                if (!data || !Array.isArray(data.entries)) return;
+                // sort by date desc, then take up to 2
+                var entries = data.entries.slice().sort(function (a, b) {
+                  return new Date(b.date) - new Date(a.date);
+                }).slice(0, 2);
+
+                entries.forEach(function (e) {
+                  var article = document.createElement('article');
+                  article.className = 'diary-item';
+                  var title = document.createElement('div');
+                  title.className = 'title';
+                  title.textContent = (e.date ? e.date + ' — ' : '') + (e.title || '');
+
+                  var excerpt = document.createElement('div');
+                  excerpt.className = 'excerpt';
+                  excerpt.textContent = e.excerpt || '';
+
+                  article.appendChild(title);
+                  article.appendChild(excerpt);
+                  container.appendChild(article);
+                });
+              })
+              .catch(function (err) { console.error('Failed to load diary.json', err); });
+          });
+          </script>
         </section>
 
         <section class="card">
@@ -68,4 +108,3 @@
   </div>
 </body>
 </html>
-
