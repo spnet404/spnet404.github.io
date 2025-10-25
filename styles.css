@@ -189,3 +189,24 @@ p{ color:var(--muted); margin:0 0 12px 0; line-height:1.6 }
   border: 2px solid var(--accent);
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
+
+/* リスト */
+ul, ol {
+  margin-left: 1.5em;
+}
+
+ul li, ol li {
+  margin: 0.5em 0;
+  color: var(--muted);
+}
+
+/* リンク */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #a88fff;
+  text-decoration: underline;
+}
