@@ -33,10 +33,110 @@
         <article class="card article">
           <h1>ブログ記事一覧</h1>
 
-          <ul>
+          <ul id="article-list">
+            <!-- JavaScript が実行されない場合のフォールバック（手動のエントリ） -->
             <li><a href="entry-2025102502.html">2025-10-25：日記もあるのにブログも作った</a></li>
             <li><a href="entry-2025102501.html">2025-10-24：またまたリニューアル</a></li>
           </ul>
+
+          <script>
+          (async function(){
+            const listEl = document.getElementById('article-list');
+            const basePath = './article/';
+            try {
+              const baseUrl = new URL(basePath, window.location.href);
+
+              // まずディレクトリパスをフェッチして、ディレクトリインデックスに含まれるリンクを探す
+              let files = [];
+              try {
+                const dirResp = await fetch(baseUrl.href);
+                if (dirResp.ok) {
+                  const text = await dirResp.text();
+                  const doc = new DOMParser().parseFromString(text, 'text/html');
+                  const anchors = Array.from(doc.querySelectorAll('a'));
+                  anchors.forEach(a => {
+                    const href = a.getAttribute('href');
+                    if (!href) return;
+                    // HTML ファイルらしいリンクを集める
+                    if (/\.html?$/.test(href)) {
+                      const abs = new URL(href, baseUrl).href;
+                      files.push(abs);
+                    }
+                  });
+                }
+              } catch(e) {
+                // フェッチエラーは無視してフォールバックへ
+                console.warn('ディレクトリ取得失敗:', e);
+              }
+
+              // ディレクトリ一覧がない場合は article/list.json を試す（存在すれば配列の相対パスを期待）
+              if (files.length === 0) {
+                try {
+                  const jsonResp = await fetch(new URL('list.json', baseUrl).href);
+                  if (jsonResp.ok) {
+                    const arr = await jsonResp.json();
+                    if (Array.isArray(arr)) {
+                      files = arr.map(p => new URL(p, baseUrl).href);
+                    }
+                  }
+                } catch(e) {
+                  // 無視
+                }
+              }
+
+              if (files.length === 0) {
+                // 何も見つからなければ既存のリスト（フォールバック）をそのまま残す
+                return;
+              }
+
+              // 各ファイルをフェッチしてタイトル（優先 <h1>）を取得
+              const items = await Promise.all(files.map(async (fileUrl) => {
+                try {
+                  const r = await fetch(fileUrl);
+                  if (!r.ok) return null;
+                  const t = await r.text();
+                  const doc = new DOMParser().parseFromString(t, 'text/html');
+                  let title = (doc.querySelector('h1') && doc.querySelector('h1').textContent.trim()) || (doc.querySelector('title') && doc.querySelector('title').textContent.trim()) || fileUrl;
+
+                  // ファイル名から日付を抽出（例: entry-2025102502.html -> 2025-10-25）
+                  const filename = fileUrl.split('/').pop() || '';
+                  const m = filename.match(/(\d{8})/);
+                  let dateStr = '';
+                  if (m) {
+                    const y = m[1].slice(0,4), mo = m[1].slice(4,6), d = m[1].slice(6,8);
+                    dateStr = `${y}-${mo}-${d}`;
+                  }
+
+                  return {url: fileUrl, title, date: dateStr};
+                } catch(e) {
+                  return null;
+                }
+              }));
+
+              const valid = items.filter(Boolean);
+              // 日付があるものは日付降順、無ければ URL 降順
+              valid.sort((a,b) => {
+                if (a.date && b.date) return b.date.localeCompare(a.date);
+                return b.url.localeCompare(a.url);
+              });
+
+              // 既存の内容を置き換える
+              listEl.innerHTML = '';
+              for (const it of valid) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                // 相対リンクに変換
+                a.href = it.url;
+                a.textContent = (it.date ? (it.date + '：') : '') + it.title;
+                li.appendChild(a);
+                listEl.appendChild(li);
+              }
+
+            } catch(err) {
+              console.error('記事一覧取得中にエラーが発生しました', err);
+            }
+          })();
+          </script>
 
           <hr>
 
