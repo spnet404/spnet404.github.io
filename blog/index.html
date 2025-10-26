@@ -46,41 +46,47 @@
             try {
               const baseUrl = new URL(basePath, window.location.href);
 
-              // まずディレクトリパスをフェッチして、ディレクトリインデックスに含まれるリンクを探す
+              // まず article/list.json を優先して試す（GitHub Pages などはディレクトリ一覧を返さないため）
               let files = [];
               try {
-                const dirResp = await fetch(baseUrl.href);
-                if (dirResp.ok) {
-                  const text = await dirResp.text();
-                  const doc = new DOMParser().parseFromString(text, 'text/html');
-                  const anchors = Array.from(doc.querySelectorAll('a'));
-                  anchors.forEach(a => {
-                    const href = a.getAttribute('href');
-                    if (!href) return;
-                    // HTML ファイルらしいリンクを集める
-                    if (/\.html?$/.test(href)) {
-                      const abs = new URL(href, baseUrl).href;
-                      files.push(abs);
-                    }
-                  });
-                }
-              } catch(e) {
-                // フェッチエラーは無視してフォールバックへ
-                console.warn('ディレクトリ取得失敗:', e);
-              }
-
-              // ディレクトリ一覧がない場合は article/list.json を試す（存在すれば配列の相対パスを期待）
-              if (files.length === 0) {
-                try {
-                  const jsonResp = await fetch(new URL('list.json', baseUrl).href);
-                  if (jsonResp.ok) {
+                const jsonUrl = new URL('list.json', baseUrl).href;
+                const jsonResp = await fetch(jsonUrl);
+                if (jsonResp.ok) {
+                  const ctype = (jsonResp.headers.get('content-type')||'');
+                  if (ctype.indexOf('application/json') !== -1) {
                     const arr = await jsonResp.json();
                     if (Array.isArray(arr)) {
                       files = arr.map(p => new URL(p, baseUrl).href);
                     }
+                  } else {
+                    // content-type が JSON でない場合は list.json が配信されていない可能性がある
+                    console.warn('list.json が JSON として配信されていません:', jsonUrl, ctype);
+                  }
+                }
+              } catch(e) {
+                console.warn('list.json の取得でエラー:', e);
+              }
+
+              // list.json が見つからない場合のみディレクトリ一覧にフォールバック（ただし GH Pages では無効なことが多い）
+              if (files.length === 0) {
+                try {
+                  const dirResp = await fetch(baseUrl.href);
+                  if (dirResp.ok) {
+                    const text = await dirResp.text();
+                    const doc = new DOMParser().parseFromString(text, 'text/html');
+                    const anchors = Array.from(doc.querySelectorAll('a'));
+                    anchors.forEach(a => {
+                      const href = a.getAttribute('href');
+                      if (!href) return;
+                      // HTML ファイルらしいリンクを集める
+                      if (/\.html?$/.test(href)) {
+                        const abs = new URL(href, baseUrl).href;
+                        files.push(abs);
+                      }
+                    });
                   }
                 } catch(e) {
-                  // 無視
+                  console.warn('ディレクトリ取得失敗:', e);
                 }
               }
 
@@ -94,6 +100,8 @@
                 try {
                   const r = await fetch(fileUrl);
                   if (!r.ok) return null;
+                  const rctype = (r.headers.get('content-type')||'');
+                  if (rctype.indexOf('text/html') === -1) return null;
                   const t = await r.text();
                   const doc = new DOMParser().parseFromString(t, 'text/html');
                   let title = (doc.querySelector('h1') && doc.querySelector('h1').textContent.trim()) || (doc.querySelector('title') && doc.querySelector('title').textContent.trim()) || fileUrl;
