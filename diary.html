@@ -80,20 +80,49 @@
           document.addEventListener('DOMContentLoaded', function () {
             var container = document.getElementById('diary-list');
             if (!container) return;
+
+            var MAX_INITIAL = 3;
+
+            function createDiaryArticle(e) {
+              var article = document.createElement('article');
+              article.className = 'diary-item';
+              var inner = '' +
+                '<div class="title">' + (e.date ? e.date + ' — ' : '') + (e.title || '') + '</div>' +
+                '<div class="meta">' + (e.category ? 'カテゴリ: ' + e.category : '') + '</div>' +
+                '<div class="excerpt">' + (e.excerpt || '') + '</div>';
+              article.innerHTML = inner;
+              return article;
+            }
+
             fetch('diary.json')
               .then(function (res) { return res.json(); })
               .then(function (data) {
                 if (!data || !Array.isArray(data.entries)) return;
-                data.entries.forEach(function (e) {
-                  var article = document.createElement('article');
-                  article.className = 'diary-item';
-                  var inner = '' +
-                    '<div class="title">' + (e.date ? e.date + ' — ' : '') + (e.title || '') + '</div>' +
-                    '<div class="meta">' + (e.category ? 'カテゴリ: ' + e.category : '') + '</div>' +
-                    '<div class="excerpt">' + (e.excerpt || '') + '</div>';
-                  article.innerHTML = inner;
-                  container.appendChild(article);
-                });
+                var entries = data.entries;
+
+                // Render initial entries (up to MAX_INITIAL)
+                var initialCount = Math.min(MAX_INITIAL, entries.length);
+                for (var i = 0; i < initialCount; i++) {
+                  container.appendChild(createDiaryArticle(entries[i]));
+                }
+
+                // If there are more entries, add a "もっと見る" button
+                if (entries.length > MAX_INITIAL) {
+                  var moreWrap = document.createElement('div');
+                  moreWrap.style.marginTop = '12px';
+                  var moreBtn = document.createElement('button');
+                  moreBtn.className = 'btn more-btn';
+                  moreBtn.type = 'button';
+                  moreBtn.textContent = 'もっと見る';
+                  moreBtn.addEventListener('click', function () {
+                    for (var j = MAX_INITIAL; j < entries.length; j++) {
+                      container.appendChild(createDiaryArticle(entries[j]));
+                    }
+                    moreBtn.style.display = 'none';
+                  });
+                  moreWrap.appendChild(moreBtn);
+                  container.parentNode.insertBefore(moreWrap, container.nextSibling);
+                }
               })
               .catch(function (err) { console.error('Failed to load diary.json', err); });
           });
