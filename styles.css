@@ -227,3 +227,54 @@ a:hover {
   color: #79e6b3;
   text-decoration: underline;
 }
+/* 双方向リンク用カード */
+    .link-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      transition: transform .14s ease, box-shadow .14s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .link-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    .link-card .thumb {
+      width: 56px;
+      height: 56px;
+      flex: 0 0 56px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .link-card .info h3 {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+    }
+
+    .link-card .info p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
