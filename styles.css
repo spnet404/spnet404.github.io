@@ -13,6 +13,14 @@
   --radius: 0px; /* 当時は角丸ほぼ無し */
   --max-width: 980px;
   --font: "MS Gothic","ＭＳ ゴシック",sans-serif;
+
+  /* Glossy tile variables */
+  --tile-top: #ffffff;
+  --tile-bottom: #ececec;
+  --tile-alt-top: #fbfbfb;
+  --tile-alt-bottom: #f0f0f0;
+  --gloss: rgba(255,255,255,0.6);
+  --shadow: rgba(0,0,0,0.06);
 }
 
 *{
@@ -212,6 +220,84 @@ a:hover{
 .link-card:hover{
   background:var(--tile-alt);
   border-color:#999999;
+}
+
+/* ===== Glossy/tile enhancements (overrides to add sheen) ===== */
+/* Apply multi-layer backgrounds: base gradient + subtle radial sheen */
+.sidebar,
+.brand,
+.card,
+.header,
+.link-card,
+.diary-item{
+  background-image:
+    radial-gradient(circle at 30% 12%, rgba(255,255,255,0.6), rgba(255,255,255,0) 30%),
+    linear-gradient(180deg, var(--tile-top), var(--tile-bottom));
+  background-repeat: no-repeat;
+  border:1px solid var(--border);
+  box-shadow: 0 2px 6px var(--shadow);
+  border-radius: var(--radius);
+}
+
+/* Slightly different alternate panels */
+.brand,
+.header{
+  background-image:
+    radial-gradient(circle at 30% 12%, rgba(255,255,255,0.75), rgba(255,255,255,0) 28%),
+    linear-gradient(180deg, var(--tile-alt-top), var(--tile-alt-bottom));
+}
+
+/* Nav links as small glossy tiles */
+.nav a{
+  background-image: linear-gradient(180deg, #ffffff, #f2f2f2);
+  border:1px solid var(--border);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 1px 2px rgba(0,0,0,0.04);
+  border-radius:2px;
+}
+
+.nav a.active{
+  background-image: linear-gradient(180deg, #fff7d6, #fff5c0);
+  border-color: #d7c072;
+}
+
+/* Buttons and clickable controls */
+button,
+input[type="button"],
+input[type="submit"],
+.btn{
+  display:inline-block;
+  padding:6px 10px;
+  font-family: var(--font);
+  font-size:14px;
+  color:var(--text);
+  text-decoration:none;
+  border:1px solid var(--border);
+  background-image: linear-gradient(180deg, #ffffff, #e6e6e6);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 2px 3px rgba(0,0,0,0.08);
+  border-radius:4px;
+  cursor:pointer;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.btn:hover{
+  background-image: linear-gradient(180deg, #ffffff, #dddddd);
+  transform: translateY(-1px);
+}
+
+/* Link-card sheen tweak and subtle hover lift */
+.link-card{
+  transition: background-color 0.12s, transform 0.08s, box-shadow 0.12s;
+}
+.link-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+/* Minor global link hover sheen */
+a:hover{
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0));
 }
 
 /* ===== レスポンシブ（最低限） ===== */
