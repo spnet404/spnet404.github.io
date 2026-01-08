@@ -106,6 +106,24 @@ code{
   display:block;
 }
 
+/* ===== 記事用画像（固定幅：約150px、レスポンシブ対応） ===== */
+.article-container img.article-image{
+  width:150px;
+  max-width:100%;
+  height:auto;
+  border:1px solid var(--border);
+  margin:12px auto;
+  display:block;
+}
+/* デフォルト：クラス未指定の画像は最大幅150pxに制限（必要なら .full で解除） */
+.article-container img:not(.full){
+  width:auto;
+  max-width:150px;
+  height:auto;
+  border:1px solid var(--border);
+  margin:12px auto;
+  display:block;
+}
 /* ===== 区切り ===== */
 hr{
   border:none;
