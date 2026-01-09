@@ -110,6 +110,7 @@
                 if (entries.length > MAX_INITIAL) {
                   var moreWrap = document.createElement('div');
                   moreWrap.style.marginTop = '12px';
+                  moreWrap.id = 'diary-button-wrap';
                   var moreBtn = document.createElement('button');
                   moreBtn.className = 'btn more-btn';
                   moreBtn.type = 'button';
@@ -119,6 +120,22 @@
                       container.appendChild(createDiaryArticle(entries[j]));
                     }
                     moreBtn.style.display = 'none';
+                    
+                    // Show "元に戻す" button
+                    var backBtn = document.createElement('button');
+                    backBtn.className = 'btn more-btn';
+                    backBtn.type = 'button';
+                    backBtn.textContent = '元に戻す';
+                    backBtn.addEventListener('click', function () {
+                      // Remove all entries except the first MAX_INITIAL
+                      var items = container.querySelectorAll('.diary-item');
+                      for (var k = MAX_INITIAL; k < items.length; k++) {
+                        items[k].remove();
+                      }
+                      moreBtn.style.display = '';
+                      backBtn.style.display = 'none';
+                    });
+                    moreWrap.appendChild(backBtn);
                   });
                   moreWrap.appendChild(moreBtn);
                   container.parentNode.insertBefore(moreWrap, container.nextSibling);
