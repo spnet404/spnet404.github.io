@@ -332,11 +332,17 @@ a:hover{
   color:#999999;
 }
 
-/* サイトカウンター（外部テーブル）を中央寄せ */
-.footer-links table{
-  margin:12px auto 0;
+/* FC2カウンター用スタイル */
+.footer-content > script,
+.footer-content > noscript{
+  display:block;
   text-align:center;
-  border-collapse:collapse;
+  margin-top:12px;
+}
+
+.footer-content > noscript img{
+  display:block;
+  margin:0 auto;
 }
 
 /* ===== レスポンシブ（最低限） ===== */
