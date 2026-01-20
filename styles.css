@@ -1,26 +1,28 @@
 /* ===== 2000年代風・白基調タイルデザイン ===== */
 
 :root{
-  --bg: #ffffff;
-  --panel: #ffffff;
-  --border: #cccccc;
-  --tile: #f2f2f2;
-  --tile-alt: #e9e9e9;
-  --text: #000000;
-  --link: #0000ee;
-  --visited: #551a8b;
-  --accent: #cc0000;
+  --bg: #f4fbff; /* very light blue page background */
+  --panel: #f8feff;
+  --border: #c7e6f2; /* soft blue-gray */
+  --tile: #eaf7ff;
+  --tile-alt: #e2f3ff;
+  --text: #073240; /* dark blue for good contrast */
+  --link: #0077cc;
+  --visited: #4b6fb1;
+  --accent: #0073b8; /* header/accent blue */
   --radius: 0px; /* 当時は角丸ほぼ無し */
   --max-width: 980px;
   --font: "MS Gothic","ＭＳ ゴシック",sans-serif;
+  --active: #e8f9ff; /* active tile highlight */
+  --nav-active-border: #9fcbe8;
 
-  /* Glossy tile variables */
+  /* Glossy tile variables (blue-tinged) */
   --tile-top: #ffffff;
-  --tile-bottom: #ececec;
-  --tile-alt-top: #fbfbfb;
-  --tile-alt-bottom: #f0f0f0;
-  --gloss: rgba(255,255,255,0.6);
-  --shadow: rgba(0,0,0,0.06);
+  --tile-bottom: #e6f7ff;
+  --tile-alt-top: #f8fdff;
+  --tile-alt-bottom: #e4f6ff;
+  --gloss: rgba(255,255,255,0.75);
+  --shadow: rgba(3,55,88,0.06);
 }
 
 *{
@@ -80,19 +82,19 @@ html,body{
   padding:6px;
   margin-bottom:4px;
   border:1px solid var(--border);
-  background:#fff;
+    background-image: linear-gradient(180deg, #ffffff, #f2f2f2);
   color: var(--link);
   text-decoration: underline;
 }
 
 .nav a:hover{
-  background: var(--tile-alt);
+  background: var(--active);
 }
 
 .nav a.active{
-  background:#ffffcc;
+  background: var(--active);
   font-weight:bold;
-}
+  }
 
 /* ===== メイン ===== */
 .main{
@@ -271,8 +273,8 @@ input[type="submit"],
   font-size:14px;
   color:var(--text);
   text-decoration:none;
-  border:1px solid var(--border);
-  background-image: linear-gradient(180deg, #ffffff, #e6e6e6);
+  border:1px solid var(--nav-active-border);
+  background-image: linear-gradient(180deg, #f8feff, #e6f3fb);
   box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 2px 3px rgba(0,0,0,0.08);
   border-radius:4px;
   cursor:pointer;
@@ -282,7 +284,7 @@ button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 .btn:hover{
-  background-image: linear-gradient(180deg, #ffffff, #dddddd);
+  background-image: linear-gradient(180deg, #ffffff, #e0f1fb);
   transform: translateY(-1px);
 }
 
