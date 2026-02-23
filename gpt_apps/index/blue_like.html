@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitterライクな日記アプリ</title>
+    <style>
+        /* 2008年当時のレトロな雰囲気を再現するCSS */
+        body {
+            background-color: #C0DEED; /* 懐かしのクラシックブルー */
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic Pro', Meiryo, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        #wrapper {
+            width: 764px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* ヘッダー部分 */
+        #header {
+            background-color: #fff;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4099FF;
+            letter-spacing: -1px;
+        }
+
+        #nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            color: #4099FF;
+            font-weight: bold;
+        }
+
+        /* コンテンツエリア（2カラム構成） */
+        #content {
+            display: flex;
+        }
+
+        #main-column {
+            width: 530px;
+            padding: 20px;
+            border-right: 1px solid #eee;
+        }
+
+        #side-column {
+            width: 234px;
+            padding: 20px;
+            background-color: #F8F8F8;
+        }
+
+        /* 投稿フォーム */
+        #status-update {
+            margin-bottom: 20px;
+        }
+
+        #status-update h2 {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        #status-text {
+            width: 100%;
+            height: 60px;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .update-controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 10px;
+            gap: 15px;
+        }
+
+        #char-count {
+            font-size: 24px;
+            color: #ccc;
+            font-weight: bold;
+        }
+
+        #char-count.warning { color: #d40d12; }
+
+        #update-btn {
+            background-color: #eee;
+            border: 1px solid #ccc;
+            padding: 6px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #update-btn:hover {
+            background-color: #ddd;
+        }
+
+        /* タイムライン（日記一覧） */
+        #timeline-header {
+            font-size: 14px;
+            font-weight: bold;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        #timeline {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .entry {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+
+        .entry-content {
+            flex: 1;
+        }
+
+        .entry-text {
+            margin: 0 0 5px 0;
+            line-height: 1.4;
+            word-break: break-all;
+        }
+
+        .username {
+            font-weight: bold;
+            color: #333;
+            margin-right: 5px;
+        }
+
+        .entry-meta {
+            font-size: 11px;
+            color: #999;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .delete-btn {
+            color: #4099FF;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .delete-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* サイドバー プロフィール風 */
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .stats {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .stats li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        .stats li span.count {
+            font-weight: bold;
+            color: #4099FF;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="header">
+        <div id="logo">diary</div>
+        <ul id="nav">
+            <li>ホーム</li>
+            <li>設定</li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <div id="main-column">
+            <div id="status-update">
+                <h2>いまいちばん何してる？</h2>
+                <textarea id="status-text"></textarea>
+                <div class="update-controls">
+                    <span id="char-count">140</span>
+                    <button id="update-btn">更新</button>
+                </div>
+            </div>
+
+            <div id="timeline-header">最近の更新</div>
+            <ul id="timeline">
+                </ul>
+        </div>
+
+        <div id="side-column">
+            <div class="profile-box">
+                <div class="avatar"></div>
+                <div>
+                    <strong>あなた</strong><br>
+                    <span style="font-size:12px; color:#666;">日々の記録</span>
+                </div>
+            </div>
+            <ul class="stats">
+                <li><span>更新数</span> <span class="count" id="total-count">0</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // データの保存キー
+    const STORAGE_KEY = 'retro_diary_entries';
+
+    // DOM要素の取得
+    const statusText = document.getElementById('status-text');
+    const charCount = document.getElementById('char-count');
+    const updateBtn = document.getElementById('update-btn');
+    const timeline = document.getElementById('timeline');
+    const totalCount = document.getElementById('total-count');
+
+    // 初期データの読み込み
+    let entries = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    // 文字数カウント機能 (当時の140文字制限を再現)
+    statusText.addEventListener('input', () => {
+        const remaining = 140 - statusText.value.length;
+        charCount.textContent = remaining;
+        
+        if (remaining < 0) {
+            charCount.classList.add('warning');
+            updateBtn.disabled = true;
+        } else {
+            charCount.classList.remove('warning');
+            updateBtn.disabled = false;
+        }
+    });
+
+    // 日付フォーマット関数
+    function formatDate(dateString) {
+        const d = new Date(dateString);
+        // 当時よくあった「hh:mm AM - yyyy年mm月dd日」風の表示
+        const hours = d.getHours() % 12 || 12;
+        const ampm = d.getHours() >= 12 ? 'PM' : 'AM';
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${hours}:${minutes} ${ampm} - ${year}年${month}月${day}日`;
+    }
+
+    // 画面の描画処理
+    function renderEntries() {
+        timeline.innerHTML = '';
+        totalCount.textContent = entries.length;
+
+        entries.forEach((entry, index) => {
+            const li = document.createElement('li');
+            li.className = 'entry';
+
+            // エスケープ処理（簡易的なXSS対策）
+            const safeText = entry.text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            // 改行を<br>に変換
+            const formattedText = safeText.replace(/\n/g, '<br>');
+
+            li.innerHTML = `
+                <div class="avatar"></div>
+                <div class="entry-content">
+                    <p class="entry-text"><span class="username">あなた</span> ${formattedText}</p>
+                    <div class="entry-meta">
+                        <span>${formatDate(entry.timestamp)}</span>
+                        <a class="delete-btn" onclick="deleteEntry(${index})">削除</a>
+                    </div>
+                </div>
+            `;
+            timeline.appendChild(li);
+        });
+    }
+
+    // 投稿処理
+    updateBtn.addEventListener('click', () => {
+        const text = statusText.value.trim();
+        if (text === '' || text.length > 140) return;
+
+        // 新しい投稿を配列の先頭に追加
+        entries.unshift({
+            text: text,
+            timestamp: new Date().toISOString()
+        });
+
+        // ローカルストレージに保存して再描画
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+        renderEntries();
+
+        // フォームをリセット
+        statusText.value = '';
+        charCount.textContent = '140';
+    });
+
+    // Ctrl+Enter (または Cmd+Enter) で投稿するショートカット
+    statusText.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            updateBtn.click();
+        }
+    });
+
+    // 削除処理
+    window.deleteEntry = function(index) {
+        if (confirm('この記録を削除しますか？')) {
+            entries.splice(index, 1);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+            renderEntries();
+        }
+    };
+
+    // 初回描画の実行
+    renderEntries();
+</script>
+
+</body>
+</html>

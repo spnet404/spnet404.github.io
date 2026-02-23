@@ -1,0 +1,155 @@
+/* ===== 記事ページ用：2000年代・白基調タイル風 ===== */
+
+:root{
+  --bg: #f4fbff; /* page background: very light blue */
+  --panel: #f8feff; /* panel background */
+  --tile: #eaf7ff;
+  --tile-alt: #e2f3ff;
+  --border: #c7e6f2; /* soft blue-gray border */
+  --text: #073240; /* dark blue text for contrast */
+  --muted: #324b56;
+  --link: #0077cc;
+  --visited: #4b6fb1;
+  --highlight: #e8f9ff; /* light blue highlight on hover */
+  --font: "MS Gothic","ＭＳ ゴシック",sans-serif;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  padding:20px 10px;
+  background: var(--bg) url("data:image/gif;base64,R0lGODlhBAAEAIAAAP///wAAACH5BAEAAAEALAAAAAAEAAQAAAIEjI+ZBQA7") repeat;
+  color:var(--text);
+  font-family:var(--font);
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* ===== コンテナ ===== */
+.article-container{
+  max-width:760px;
+  margin:0 auto;
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:16px;
+}
+
+/* ===== 見出し ===== */
+h1{
+  font-size:18px;
+  margin:0 0 6px 0;
+  border-bottom:2px solid var(--border);
+  padding-bottom:4px;
+}
+
+h2{
+  font-size:16px;
+  margin:18px 0 6px 0;
+  background:var(--tile-alt);
+  border:1px solid var(--border);
+  padding:4px 6px;
+}
+
+h3{
+  font-size:15px;
+  margin:14px 0 4px 0;
+}
+
+/* ===== メタ ===== */
+.meta{
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+/* ===== 段落 ===== */
+p{
+  margin:8px 0;
+}
+
+/* ===== リンク ===== */
+a{ color:var(--link); }
+
+a:visited{ color:var(--visited); }
+
+a:hover{ background:var(--highlight); }
+
+/* ===== 引用 ===== */
+blockquote{
+  margin:12px 0;
+  padding:8px;
+  background:var(--tile);
+  border:1px dashed var(--border);
+}
+
+/* ===== コード ===== */
+pre{
+  background:#f1fbff;
+  border:1px solid var(--border);
+  padding:8px;
+  overflow-x:auto;
+  font-family:"MS Gothic","ＭＳ ゴシック",monospace;
+  font-size:13px;
+}
+
+code{
+  background:#eef9ff;
+  border:1px solid var(--border);
+  padding:1px 4px;
+}
+
+/* ===== 画像 ===== */
+.article-container img{
+  max-width:100%;
+  border:1px solid var(--border);
+  margin:12px auto;
+  display:block;
+}
+
+/* ===== 記事用画像（固定幅：約150px、レスポンシブ対応） ===== */
+.article-container img.article-image{
+  width:150px;
+  max-width:100%;
+  height:auto;
+  border:1px solid var(--border);
+  margin:12px auto;
+  display:block;
+}
+/* デフォルト：クラス未指定の画像は最大幅150pxに制限（必要なら .full で解除） */
+.article-container img:not(.full){
+  width:auto;
+  max-width:150px;
+  height:auto;
+  border:1px solid var(--border);
+  margin:12px auto;
+  display:block;
+}
+/* ===== 区切り ===== */
+hr{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:16px 0;
+}
+
+/* ===== リスト ===== */
+ul,ol{
+  margin-left:1.5em;
+}
+
+li{
+  margin:4px 0;
+}
+
+/* ===== フッター ===== */
+footer{
+  margin-top:20px;
+  text-align:center;
+  font-size:12px;
+  border-top:1px solid var(--border);
+  padding-top:8px;
+}
+
+@media(max-width:720px){
+  body{ padding:10px; }
+  .article-container{ padding:12px; }
+}
