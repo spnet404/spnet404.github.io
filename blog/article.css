@@ -140,6 +140,35 @@ li{
   margin:4px 0;
 }
 
+/* ===== 記事一覧（タイル表示：縦並び） ===== */
+#article-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+#article-list li{
+  margin:0;
+  padding:12px 14px;
+  background:var(--tile);
+  border:1px solid var(--border);
+  border-radius:6px;
+}
+
+#article-list li a{
+  display:block;
+  color:var(--link);
+  text-decoration:none;
+  font-weight:600;
+}
+
+#article-list li a:hover{
+  background:var(--highlight);
+}
+
 /* ===== フッター ===== */
 footer{
   margin-top:20px;
