@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>TypeMini - Mac Style</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", sans-serif;
+}
+
+.window {
+  width: 500px;
+  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.6);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.titlebar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  background: rgba(255,255,255,0.4);
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.red { background: #ff5f57; }
+.yellow { background: #ffbd2e; }
+.green { background: #28c840; }
+
+.content {
+  padding: 30px;
+  text-align: center;
+}
+
+.word {
+  font-size: 28px;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+input:focus {
+  border-color: #007aff;
+}
+
+.stats {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+button.start {
+  margin-top: 20px;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #007aff;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button.start:hover {
+  background: #0066d6;
+}
+</style>
+</head>
+<body>
+
+<div class="window">
+  <div class="titlebar">
+    <div class="buttons">
+      <div class="btn red"></div>
+      <div class="btn yellow"></div>
+      <div class="btn green"></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="word" id="word">Press Start</div>
+    <input type="text" id="input" disabled>
+    <div class="stats">
+      スコア: <span id="score">0</span> |
+      制限時間: <span id="time">30</span>秒
+    </div>
+    <button class="start" onclick="startGame()">Start</button>
+  </div>
+</div>
+
+<script>
+const words = ["apple", "design", "macbook", "keyboard", "browser",
+               "window", "typing", "javascript", "minimal", "cloud"];
+
+let score = 0;
+let time = 30;
+let currentWord = "";
+let timer;
+
+const wordDisplay = document.getElementById("word");
+const input = document.getElementById("input");
+const scoreDisplay = document.getElementById("score");
+const timeDisplay = document.getElementById("time");
+
+function newWord() {
+  currentWord = words[Math.floor(Math.random() * words.length)];
+  wordDisplay.textContent = currentWord;
+}
+
+function startGame() {
+  score = 0;
+  time = 30;
+  input.disabled = false;
+  input.value = "";
+  input.focus();
+  scoreDisplay.textContent = score;
+  timeDisplay.textContent = time;
+  newWord();
+
+  clearInterval(timer);
+  timer = setInterval(() => {
+    time--;
+    timeDisplay.textContent = time;
+    if (time <= 0) {
+      clearInterval(timer);
+      input.disabled = true;
+      wordDisplay.textContent = "Game Over";
+    }
+  }, 1000);
+}
+
+input.addEventListener("input", () => {
+  if (input.value === currentWord) {
+    score++;
+    scoreDisplay.textContent = score;
+    input.value = "";
+    newWord();
+  }
+});
+</script>
+
+</body>
+</html>
