@@ -142,7 +142,8 @@ code {
   max-width: 100%;
   margin: 1.5em auto;
   border-radius: 8px;
-  box-shadow: 0 0 14px rgba(0,0,0,0.3);
+  /* フレーム（シャドウ）を細くする */
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
 }
 
 /* 区切り線 */
