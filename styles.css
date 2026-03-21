@@ -340,3 +340,97 @@ a:hover {
   display: block;
   margin: 0 auto;
 }
+
+/* 管理人のステータス */
+.status-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.status-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.status-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 16px;
+  white-space: nowrap;
+}
+
+.status-badge.available {
+  background: rgba(47, 191, 127, 0.2);
+  color: #2fbf7f;
+}
+
+.status-badge.busy {
+  background: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+}
+
+.status-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.status-bar {
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.status-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #2fbf7f, #4fbf8f);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.status-bar-fill.level-low {
+  background: linear-gradient(90deg, #2fbf7f, #4fbf8f);
+}
+
+.status-bar-fill.level-medium {
+  background: linear-gradient(90deg, #f59f00, #ffa21a);
+}
+
+.status-bar-fill.level-high {
+  background: linear-gradient(90deg, #ff6b6b, #ff8787);
+}
+
+.status-level-text {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-level-percent {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.status-message {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  padding: 10px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.01));
+  border-left: 3px solid var(--accent);
+}

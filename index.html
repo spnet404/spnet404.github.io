@@ -100,6 +100,67 @@
         </section>
 
         <section class="card">
+          <div class="status-section">
+            <div class="status-header">
+              <h2>管理人のステータス 🏢</h2>
+              <span id="status-badge" class="status-badge available">待機中</span>
+            </div>
+            <div class="status-bar-container">
+              <div class="status-bar">
+                <div id="status-bar-fill" class="status-bar-fill level-low" style="width: 0%"></div>
+              </div>
+              <div class="status-level-text">
+                <span>忙しさレベル</span>
+                <span class="status-level-percent"><span id="status-percent">0</span>%</span>
+              </div>
+            </div>
+            <div id="status-message" class="status-message">
+              ステータスを読み込み中...
+            </div>
+          </div>
+        </section>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var statusBadge = document.getElementById('status-badge');
+          var statusBarFill = document.getElementById('status-bar-fill');
+          var statusPercent = document.getElementById('status-percent');
+          var statusMessage = document.getElementById('status-message');
+
+          fetch('status.json')
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+              if (!data) return;
+
+              var level = data.level || 0;
+              var busy = data.busy || false;
+              var message = data.message || '';
+
+              // Update badge
+              statusBadge.className = 'status-badge ' + (busy ? 'busy' : 'available');
+              statusBadge.textContent = busy ? '忙しい 😵' : '待機中 😊';
+
+              // Update progress bar
+              statusBarFill.style.width = level + '%';
+              if (level <= 50) {
+                statusBarFill.className = 'status-bar-fill level-low';
+              } else if (level <= 75) {
+                statusBarFill.className = 'status-bar-fill level-medium';
+              } else {
+                statusBarFill.className = 'status-bar-fill level-high';
+              }
+
+              // Update percent
+              statusPercent.textContent = level;
+
+              // Update message
+              statusMessage.textContent = message;
+            })
+            .catch(function (err) { console.error('Failed to load status.json', err); });
+        });
+        </script>
+
+        <section class="card">
           <h2>About</h2>
           <p>ご覧いただきありがとうございます。このページはspnet_404が運営しています。ゆっくりしていってね！！</p>
         </section>
