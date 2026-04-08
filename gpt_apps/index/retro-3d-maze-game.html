@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Retro 3D Maze</title>
+<style>
+body {
+  margin: 0;
+  background: black;
+  font-family: "MS Gothic", monospace;
+  color: lime;
+}
+#ui {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 14px;
+}
+canvas {
+  display: block;
+}
+</style>
+</head>
+<body>
+<div id="ui">矢印キーで移動 / 左右で回転</div>
+<canvas id="game"></canvas>
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// 複数ステージ（S = スタート, G = ゴール）
+const stages = [
+  [
+    "##########",
+    "#S       #",
+    "#  ####  #",
+    "#     #  #",
+    "#  #     #",
+    "#  #### G#",
+    "#        #",
+    "##########"
+  ],
+  [
+    "##########",
+    "#S  #    #",
+    "# # # ## #",
+    "# #   #  #",
+    "# ### ## #",
+    "#     G  #",
+    "# ###### #",
+    "##########"
+  ],
+  [
+    "##########",
+    "#S       #",
+    "# ###### #",
+    "#      # #",
+    "###### # #",
+    "#    G   #",
+    "# ###### #",
+    "##########"
+  ]
+];
+
+let currentStage = 0;
+let map = stages[currentStage];
+
+let player = { x: 2.5, y: 2.5, angle: 0 };
+let gameClear = false;
+
+const FOV = Math.PI / 3;
+const depth = 20;
+
+const keys = {};
+window.addEventListener("keydown", e => keys[e.key] = true);
+window.addEventListener("keyup", e => keys[e.key] = false);
+
+function loadStage(index) {
+  currentStage = index;
+  map = stages[currentStage];
+
+  // S（スタート地点）を探す
+  let found = false;
+  for (let y = 0; y < map.length; y++) {
+    for (let x = 0; x < map[y].length; x++) {
+      if (map[y][x] === "S") {
+        player.x = x + 0.5;
+        player.y = y + 0.5;
+        found = true;
+        break;
+      }
+    }
+    if (found) break;
+  }
+
+  // 念のためSが無い場合は空白にスポーン
+  if (!found) {
+    for (let y = 0; y < map.length; y++) {
+      for (let x = 0; x < map[y].length; x++) {
+        if (map[y][x] === " ") {
+          player.x = x + 0.5;
+          player.y = y + 0.5;
+          found = true;
+          break;
+        }
+      }
+      if (found) break;
+    }
+  }
+
+  player.angle = 0;
+  gameClear = false;
+}
+
+function update() {
+  if (gameClear) return;
+
+  const speed = 0.05;
+  const rotSpeed = 0.04;
+
+  if (keys["ArrowLeft"]) player.angle -= rotSpeed;
+  if (keys["ArrowRight"]) player.angle += rotSpeed;
+
+  let moveX = Math.cos(player.angle) * speed;
+  let moveY = Math.sin(player.angle) * speed;
+
+  if (keys["ArrowUp"]) {
+    if (map[Math.floor(player.y)][Math.floor(player.x + moveX)] !== "#") player.x += moveX;
+    if (map[Math.floor(player.y + moveY)][Math.floor(player.x)] !== "#") player.y += moveY;
+  }
+
+  if (keys["ArrowDown"]) {
+    if (map[Math.floor(player.y)][Math.floor(player.x - moveX)] !== "#") player.x -= moveX;
+    if (map[Math.floor(player.y - moveY)][Math.floor(player.x)] !== "#") player.y -= moveY;
+  }
+
+  const tile = map[Math.floor(player.y)][Math.floor(player.x)];
+  if (tile === "G") {
+    gameClear = true;
+
+    setTimeout(() => {
+      if (currentStage < stages.length - 1) {
+        alert(`ステージ ${currentStage + 1} クリア！次へ進むで✨`);
+        loadStage(currentStage + 1);
+      } else {
+        alert("🎉 全ステージクリア！おめでとう！");
+      }
+    }, 100);
+  }
+}
+
+function render() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (let x = 0; x < canvas.width; x++) {
+    let rayAngle = (player.angle - FOV/2) + (x / canvas.width) * FOV;
+
+    let distance = 0;
+    let hit = false;
+    let hitGoal = false;
+
+    while (!hit && distance < depth) {
+      distance += 0.05;
+
+      let testX = Math.floor(player.x + Math.cos(rayAngle) * distance);
+      let testY = Math.floor(player.y + Math.sin(rayAngle) * distance);
+
+      if (!map[testY] || !map[testY][testX]) {
+        hit = true;
+        distance = depth;
+        break;
+      }
+
+      if (map[testY][testX] === "#") {
+        hit = true;
+      }
+
+      if (map[testY][testX] === "G") {
+        hit = true;
+        hitGoal = true;
+      }
+    }
+
+    let wallHeight = canvas.height / distance;
+    let wallTop = (canvas.height - wallHeight) / 2;
+    let wallBottom = wallTop + wallHeight;
+
+    ctx.fillStyle = "rgb(20, 20, 40)";
+    ctx.fillRect(x, 0, 1, wallTop);
+
+    ctx.fillStyle = "rgb(60, 60, 60)";
+    ctx.fillRect(x, wallBottom, 1, canvas.height - wallBottom);
+
+    if (hitGoal) {
+      ctx.fillStyle = "rgb(255, 255, 0)";
+    } else {
+      let shade = 255 - Math.min(255, distance * 20);
+      ctx.fillStyle = `rgb(0, 0, ${shade})`;
+    }
+
+    ctx.fillRect(x, wallTop, 1, wallHeight);
+  }
+
+  ctx.fillStyle = "lime";
+  ctx.font = "16px MS Gothic";
+  ctx.fillText(`STAGE: ${currentStage + 1}`, 10, 40);
+}
+
+function loop() {
+  update();
+  render();
+  requestAnimationFrame(loop);
+}
+
+// 初期ステージ読み込み
+loadStage(0);
+loop();
+</script>
+</body>
+</html>
