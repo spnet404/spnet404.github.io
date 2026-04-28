@@ -119,6 +119,53 @@ html,body{
   gap:18px;
   align-items:stretch;
 }
+
+/* ===== macOS風 トラフィックライト ===== */
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px 6px 14px;
+  margin: -18px -18px 14px -18px; /* cardのpaddingを打ち消して端まで伸ばす */
+  border-bottom: 1px solid var(--glass);
+}
+
+.window-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  transition: filter 0.15s ease;
+  cursor: default;
+}
+
+/* 閉じる（赤） */
+.window-btn.close  { background: #ff5f57; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.12); }
+/* 最小化（黄） */
+.window-btn.min    { background: #febc2e; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.12); }
+/* 拡大（緑） */
+.window-btn.expand { background: #28c840; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.12); }
+
+/* ホバーで記号を表示 */
+.window-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  font-size: 8px;
+  line-height: 12px;
+  text-align: center;
+}
+
+.window-controls:hover .window-btn.close::before  { content: '✕'; opacity: 1; color: rgba(0,0,0,0.5); }
+.window-controls:hover .window-btn.min::before    { content: '−'; opacity: 1; color: rgba(0,0,0,0.5); }
+.window-controls:hover .window-btn.expand::before { content: '+'; opacity: 1; color: rgba(0,0,0,0.5); }
+
 .header{
   display:flex;
   justify-content:space-between;
