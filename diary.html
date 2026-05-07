@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>日記 — spnet_404のホームページ</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="CSS/styles.css">
 </head>
 <body>
   <div class="app">
@@ -43,7 +43,7 @@
           </div>
 
           <div style="margin-top:14px" id="diary-list" class="diary-list">
-            <!-- diary entries will be rendered here from diary.json -->
+            <!-- diary entries will be rendered here from JSON/diary.json -->
           </div>
 
           <!-- Fallback: keep original static content for users without JavaScript -->
@@ -99,7 +99,7 @@
               return article;
             }
 
-            fetch('diary.json')
+            fetch('JSON/diary.json')
               .then(function (res) { return res.json(); })
               .then(function (data) {
                 if (!data || !Array.isArray(data.entries)) return;
@@ -146,7 +146,7 @@
                   container.parentNode.insertBefore(moreWrap, container.nextSibling);
                 }
               })
-              .catch(function (err) { console.error('Failed to load diary.json', err); });
+              .catch(function (err) { console.error('Failed to load JSON/diary.json', err); });
           });
           </script>
         </section>

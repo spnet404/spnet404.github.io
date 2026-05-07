@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>spnet_404のホームページ — トップ</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="CSS/styles.css">
 </head>
 <body>
   <div class="app">
@@ -52,7 +52,7 @@
           </div>
           <h2>最近の更新</h2>
           <div id="recent-diary-list" class="diary-list" style="margin-top:12px">
-            <!-- recent diary entries (max 2) will be rendered here from diary.json -->
+            <!-- recent diary entries (max 2) will be rendered here from JSON/diary.json -->
           </div>
 
           <!-- Fallback: original static content for no-JS users -->
@@ -74,7 +74,7 @@
           document.addEventListener('DOMContentLoaded', function () {
             var container = document.getElementById('recent-diary-list');
             if (!container) return;
-            fetch('diary.json')
+            fetch('JSON/diary.json')
               .then(function (res) { return res.json(); })
               .then(function (data) {
                 if (!data || !Array.isArray(data.entries)) return;
@@ -99,7 +99,7 @@
                   container.appendChild(article);
                 });
               })
-              .catch(function (err) { console.error('Failed to load diary.json', err); });
+              .catch(function (err) { console.error('Failed to load JSON/diary.json', err); });
           });
           </script>
         </section>
@@ -137,7 +137,7 @@
           var statusPercent = document.getElementById('status-percent');
           var statusMessage = document.getElementById('status-message');
 
-          fetch('status.json')
+          fetch('JSON/status.json')
             .then(function (res) { return res.json(); })
             .then(function (data) {
               if (!data) return;
@@ -166,7 +166,7 @@
               // Update message
               statusMessage.textContent = message;
             })
-            .catch(function (err) { console.error('Failed to load status.json', err); });
+            .catch(function (err) { console.error('Failed to load JSON/status.json', err); });
         });
         </script>
 
