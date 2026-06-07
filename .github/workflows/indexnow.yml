@@ -1,0 +1,23 @@
+name: IndexNow Notification
+
+on:
+  push:
+    branches:
+      - main # 実際にPagesが公開されるブランチ名（main または master）にしてください
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send URL to IndexNow
+        run: |
+          curl -X POST "https://indexnow.org" \
+          -H "Content-Type: application/json; charset=utf-8" \
+          -d '{
+            "host": "spnet404.github.io/",
+            "key": "${{ secrets.INDEXNOW_KEY }}",
+            "keyLocation": "https://yourdomain.com{{ secrets.INDEXNOW_KEY }}.txt",
+            "urlList": [
+              "https://spnet404.github.io/",
+            ]
+          }'
