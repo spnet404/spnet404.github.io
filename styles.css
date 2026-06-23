@@ -481,3 +481,15 @@ a:hover {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.01));
   border-left: 3px solid var(--accent);
 }
+
+/* Twitter埋め込み */
+.twitter-embed-wrap {
+  margin-top: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.twitter-embed-wrap iframe {
+  border-radius: 10px !important;
+  width: 100% !important;
+}
