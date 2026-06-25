@@ -1,6 +1,12 @@
 {
   "entries": [  
-     {
+         {
+      "date": "2026-06-25",
+      "title": "elementary OSが気になる",
+    "category": "Linux",
+      "excerpt": "いろんなLinuxディストリビューションが気になっているこの頃、elementay OSやDeepinあたりが非常に気になる。というか、Zorin OSでFcitx 5を使うと動作が安定しない。入力位置がカーソルの箇所に飛ぶ"
+    },      
+    {
       "date": "2026-06-23",
       "title": "うーん、忙しいんです",
     "category": "おーい管理人？",
