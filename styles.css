@@ -482,6 +482,27 @@ a:hover {
   border-left: 3px solid var(--accent);
 }
 
+/* Discord Lanyard埋め込み */
+.lanyard-embed {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.lanyard-embed img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+  .lanyard-embed {
+    max-width: 100%;
+  }
+}
+
 /* Twitter埋め込み */
 .twitter-embed-wrap {
   margin-top: 8px;
