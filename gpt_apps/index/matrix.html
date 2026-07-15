@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Matrix Digital Rain</title>
+<style>
+html, body {
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+}
+
+canvas {
+    display: block;
+}
+</style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    columns = Math.floor(canvas.width / fontSize);
+    drops = Array(columns).fill(0);
+}
+
+const chars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+const fontSize = 18;
+let columns;
+let drops;
+
+resize();
+window.addEventListener("resize", resize);
+
+function draw() {
+
+    ctx.fillStyle = "rgba(0,0,0,0.08)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.font = fontSize + "px monospace";
+
+    for(let i=0;i<drops.length;i++){
+
+        // 通常の緑文字
+        const char = chars[Math.floor(Math.random()*chars.length)];
+
+        ctx.fillStyle = "#00ff66";
+        ctx.shadowBlur = 0;
+        ctx.fillText(char, i*fontSize, drops[i]*fontSize);
+
+        // 先頭文字（白く光る）
+        ctx.fillStyle = "#ffffff";
+        ctx.shadowColor = "#ccffcc";
+        ctx.shadowBlur = 15;
+        ctx.fillText(char, i*fontSize, drops[i]*fontSize);
+
+        ctx.shadowBlur = 0;
+
+        if(drops[i]*fontSize > canvas.height && Math.random() > 0.975){
+            drops[i]=0;
+        }
+
+        drops[i]++;
+    }
+}
+
+setInterval(draw,33);
+</script>
+
+</body>
+</html>
