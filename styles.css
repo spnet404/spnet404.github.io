@@ -510,11 +510,19 @@ a:hover {
   }
 }
 
-/* Twitter埋め込み */
+/* Twitter / Bluesky埋め込み */
 .twitter-embed-wrap {
   margin-top: 8px;
   border-radius: 10px;
   overflow: hidden;
+  width: 100%;
+}
+
+.twitter-embed-wrap .bluesky-embed,
+.twitter-embed-wrap bst-widget {
+  width: 100% !important;
+  min-height: 220px;
+  display: block;
 }
 
 .twitter-embed-wrap iframe {
