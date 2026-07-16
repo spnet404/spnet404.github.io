@@ -555,14 +555,14 @@ h1 {
 h2 {
   font-size: 1.4em;
   color: var(--text);
-  margin-top: 2em;
+  margin-top: 1.2em;
   border-left: 4px solid var(--accent);
   padding-left: 0.6em;
 }
 
 h3 {
   font-size: 1.2em;
-  margin-top: 1.5em;
+  margin-top: 1.2em;
   color: var(--text);
 }
 
