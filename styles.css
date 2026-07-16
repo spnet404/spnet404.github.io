@@ -217,6 +217,8 @@ html,body{
 h1,h2,h3{ margin:0 0 10px 0; color:var(--text) }
 p{ color:var(--muted); margin:0 0 12px 0; line-height:1.6 }
 .meta{ color:var(--muted); font-size:13px }
+.article .meta{ margin-bottom:1.2em; display:block; }
+.article p:first-of-type{ margin-top:0.8em; }
 
 /* diary list */
 .diary-list{ display:flex; flex-direction:column; gap:12px }
