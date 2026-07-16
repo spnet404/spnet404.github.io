@@ -5,7 +5,7 @@
 
 ## サイトの基本情報
 
-- サイトリンク： [spnet_404のホームページ](https://spnet404.github.io/index.html)
+- サイトリンク： [spnet_404のホームページ](index.html)
 - 運営者：spnet_404
 - サイト開設時期：2024年の中ごろ
 - トップページの容量：6KB
@@ -30,3 +30,12 @@
 ## お問い合わせ
 
 メール：yuuki1365@vivaldi.net
+
+## 主なサイトマップ
+
+- [トップページ](index.html)
+- [プロフィール](profile.html)
+- [日記](diary.html)
+- [ブログ](blog/index.html)
+- [ウェブアプリ集](gpt_apps/index.html)
+- [技術解説](info/index.html)
