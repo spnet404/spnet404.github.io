@@ -8,7 +8,7 @@
 
 - [トップページ](https://spnet404.github.io/index.html):サイトのトップページ
 - [プロフィール](https://spnet404.github.io/profile.html):自己紹介ページ
-- [日記](https://spnet404.github.io/diary.html)
+- [日記](https://spnet404.github.io/diary.html):日記一覧
 
 ## ブログ
 
