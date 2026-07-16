@@ -5,7 +5,7 @@
 
 ## サイトの基本情報
 
-- サイトリンク： [spnet_404のホームページ](index.html)
+- サイトリンク： [spnet_404のホームページ](https://spnet404.github.io/index.html)
 - 運営者：spnet_404
 - サイト開設時期：2024年の中ごろ
 - トップページの容量：6KB
@@ -36,12 +36,12 @@
 
 ## 主なサイトマップ
 
-- [トップページ](index.html)
-- [プロフィール](profile.html)
-- [日記](diary.html)
-- [ブログ](blog/index.html)
-- [ウェブアプリ集](gpt_apps/index.html)
-- [技術解説](info/index.html)
+- [トップページ](https://spnet404.github.io/index.html)
+- [プロフィール](https://spnet404.github.io/profile.html)
+- [日記](https://spnet404.github.io/diary.html)
+- [ブログ](https://spnet404.github.io/blog/index.html)
+- [ウェブアプリ集](https://spnet404.github.io/gpt_apps/index.html)
+- [技術解説](https://spnet404.github.io/info/index.html)
 
 ## AI学習について
 
