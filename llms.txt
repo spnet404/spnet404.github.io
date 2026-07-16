@@ -11,10 +11,13 @@
 - [日記](https://spnet404.github.io/diary.html)
 
 ## ブログ
+
 - [ブログ記事一覧](https://spnet404.github.io/blog/index.html):ブログ記事一覧。記事は「blog/ariticle」ディレクトリにまとめられている
 
 ## 技術的な解説
+
 - [ウェブサイトの透明性に関する説明](https://spnet404.github.io/info/index.html):ウェブサイトに使われている技術の解説ページ
 
 ## ウェブアプリ集
+
 - [GPTで作ったウェブアプリ集](https://spnet404.github.io/gpt_apps/index.html):生成AIに作らせたウェブアプリを公開しているページ。ウェブアプリは「gpt_apps/index」ディレクトリにまとめられている
