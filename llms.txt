@@ -12,7 +12,7 @@
 
 ## ブログ
 
-- [ブログ記事一覧](https://spnet404.github.io/blog/index.html):ブログ記事一覧。記事は「blog/ariticle」ディレクトリにまとめられている
+- [ブログ記事一覧](https://spnet404.github.io/blog/index.html):ブログ記事一覧。記事は「blog/article」ディレクトリにまとめられている
 
 ## 技術的な解説
 
