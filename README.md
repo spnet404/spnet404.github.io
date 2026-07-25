@@ -5,7 +5,7 @@
 
 ## サイトの基本情報
 
-- サイトリンク： [spnet_404のホームページ](https://spnet404.github.io/index.html)
+- サイトリンク：[spnet_404のホームページ](https://spnet404.github.io/index.html)
 - 運営者：spnet_404
 - サイト開設時期：2024年の中ごろ
 - トップページの容量：6KB
