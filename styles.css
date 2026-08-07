@@ -284,13 +284,13 @@ p {
 .diary-item .title {
   font-weight: 700;
   color: var(--text);
-  font-family: var(--serif);
+  font-family: var(--mono);
 }
 
 .diary-item .excerpt {
   color: var(--muted);
   font-size: 14px;
-  font-family: var(--serif);
+  font-family: var(--mono);
   line-height: 1.8;
 }
 
