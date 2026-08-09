@@ -9,7 +9,7 @@
 - 運営者：spnet_404
 - サイト開設時期：2024年の中ごろ
 - トップページの容量：6KB
-- 使用している技術：HTML, JavaScript, CSS,JSON, 埋め込みサービス「BlueSkyTimeline」
+- 使用している技術：HTML, JavaScript, CSS, JSON, 埋め込みサービス「BlueSkyTimeline」
 
 ## お願いとご注意
 
