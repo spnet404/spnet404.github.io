@@ -423,6 +423,27 @@ a:hover {
 
 .footer-content {
   text-align: center;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.footer-content a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer-content a:hover {
+  text-decoration: underline;
+}
+
+.footer-content img {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: text-bottom;
+  margin-left: 0.2em;
+  opacity: 0.9;
 }
 
 .footer-content p {
