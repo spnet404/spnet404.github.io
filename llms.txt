@@ -4,6 +4,10 @@
 
 このサイトは、個人が趣味で運営している自由奔放なホームページです。筆者のPC環境や、スマホ、お出かけの様子を発信しています。
 
+## サイトマップ
+
+- [XML Sitemap](https://spnet404.github.io/sitemap.xml):すべてのURLがここにまとめられている
+
 ## 主なページ
 
 - [トップページ](https://spnet404.github.io/index.html):サイトのトップページ
