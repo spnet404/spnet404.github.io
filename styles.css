@@ -124,6 +124,15 @@ body::before {
   margin-top: 2px;
 }
 
+.sidebar-image {
+  display: block;
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  margin-top: 18px;
+  border-radius: 12px;
+}
+
 .nav {
   margin-top: 8px;
   display: flex;
