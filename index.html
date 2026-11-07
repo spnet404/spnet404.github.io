@@ -26,10 +26,83 @@
 
         <div style="margin-top:18px; font-size:13px; color:var(--muted)">
           Tags<br/>
-          <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap">
+          <div id="tag-container" style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap">
             <span class="btn" style="padding:6px 8px; font-size:12px">#お知らせ</span>
           </div>
         </div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var tagContainer = document.getElementById('tag-container');
+          if (!tagContainer) return;
+
+          var MAX_VISIBLE = 3;
+
+          fetch('diary.json')
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+              if (!data || !Array.isArray(data.entries)) return;
+
+              // diary.json の category 欄から重複なくカテゴリを抽出
+              var categories = [];
+              var seen = new Set();
+              data.entries.forEach(function (e) {
+                var cat = e.category && typeof e.category === 'string' ? e.category.trim() : '';
+                if (cat && !seen.has(cat)) {
+                  seen.add(cat);
+                  categories.push(cat);
+                }
+              });
+
+              if (categories.length === 0) return;
+
+              // コンテナを初期化して動的にタグを生成
+              tagContainer.innerHTML = '';
+
+              var extraTags = [];
+              categories.forEach(function (cat, index) {
+                var span = document.createElement('span');
+                span.className = 'btn';
+                span.style.padding = '6px 8px';
+                span.style.fontSize = '12px';
+                span.textContent = '#' + cat;
+
+                if (index >= MAX_VISIBLE) {
+                  span.style.display = 'none';
+                  extraTags.push(span);
+                }
+                tagContainer.appendChild(span);
+              });
+
+              // 4つ以上のタグがある場合は「すべてのタグを見る」切り替えボタンを設置
+              if (extraTags.length > 0) {
+                var toggleWrap = document.createElement('div');
+                toggleWrap.style.marginTop = '8px';
+
+                var toggleBtn = document.createElement('button');
+                toggleBtn.type = 'button';
+                toggleBtn.className = 'btn';
+                toggleBtn.style.padding = '4px 8px';
+                toggleBtn.style.fontSize = '11px';
+                toggleBtn.style.cursor = 'pointer';
+                toggleBtn.textContent = 'すべてのタグを見る';
+
+                var isExpanded = false;
+                toggleBtn.addEventListener('click', function () {
+                  isExpanded = !isExpanded;
+                  extraTags.forEach(function (el) {
+                    el.style.display = isExpanded ? '' : 'none';
+                  });
+                  toggleBtn.textContent = isExpanded ? '閉じる' : 'すべてのタグを見る';
+                });
+
+                toggleWrap.appendChild(toggleBtn);
+                tagContainer.parentNode.appendChild(toggleWrap);
+              }
+            })
+            .catch(function (err) { console.error('Failed to load diary.json for tags', err); });
+        });
+        </script>
 
         <img class="sidebar-image" src="images/cc-img.webp" alt="サイドバー画像">
       </aside>
