@@ -684,6 +684,11 @@ a:hover {
   font-family: var(--serif);
 }
 
+.article.card > * {
+  position: relative;
+  z-index: 1;
+}
+
 .article-container h1,
 .article h1 {
   font-family: var(--serif);
