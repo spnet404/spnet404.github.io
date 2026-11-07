@@ -38,6 +38,7 @@
 - GitHub Copilot（枠組みの調整・修正）
 - Claude（枠組みの調整・修正）
 - Gemini（ウェブアプリの一部に使用）
+- Google Antigravity（挙動の改善に使用）
 
 ## お問い合わせ
 
