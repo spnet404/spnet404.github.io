@@ -83,6 +83,8 @@
 - [ブログ](https://spnet404.github.io/blog/index.html)
 - [ウェブアプリ集](https://spnet404.github.io/gpt_apps/index.html)
 - [技術解説](https://spnet404.github.io/info/index.html)
+- [llms.txt](https://spnet404.github.io/llms.txt)
+- [サイトマップ](https://spnet404.github.io/sitemap.xml)
 
 ## AI学習について
 
