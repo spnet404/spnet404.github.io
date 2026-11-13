@@ -8,7 +8,7 @@
 
 - [XML Sitemap](https://spnet404.github.io/sitemap.xml):すべてのURLがここにまとめられている
 
-# README
+## README
 
 - [README.md](https://spnet404.github.io/README.md):ホームページの簡単な概要。技術仕様や、プライバシーに関する説明もある
 
