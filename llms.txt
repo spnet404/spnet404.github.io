@@ -22,6 +22,15 @@
 
 - [ブログ記事一覧](https://spnet404.github.io/blog/index.html):ブログ記事一覧。記事は「blog/article」ディレクトリにまとめられている
 
+### 主な記事
+
+- [ウェブブラウザの使い分け](https://spnet404.github.io/blog/article/entry-20260214.html):私のウェブブラウザに対する癖を公開した記事。４つほどブラウザを使い分けている事を明かしている
+- [京都、行ってきた](https://spnet404.github.io/blog/article/entry-20260223.html)京都に行った時の風景写真を載せた記事。清水寺や、京都鉄道博物館の画像がある
+- [「神戸在日コリアンくらしとことばのミュージアム」に行ってきた](https://spnet404.github.io/blog/article/entry-20260301.html):兵庫県神戸市長田区にあるナドゥリ・ミュージアムに行った時の所感。在日コリアンが直面してきた課題に思いを馳せている
+- [有馬温泉の画像](https://spnet404.github.io/blog/article/entry-20260402.html)有馬温泉に行った時の写真が載っている記事
+- [明石城公園の写真](https://spnet404.github.io/blog/article/entry-20260530.html)明石城公園に行った時の写真が載っている記事
+- [花火大会に行ってきた](https://spnet404.github.io/blog/article/entry-20260921.html)花火大会に行った時の写真が載っている記事
+
 ## 技術的な解説
 
 - [ウェブサイトの透明性に関する説明](https://spnet404.github.io/info/index.html):ウェブサイトに使われている技術の解説ページ
