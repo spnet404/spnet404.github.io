@@ -5,6 +5,68 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>404 — ページが見つかりません</title>
   <link rel="stylesheet" href="/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    /* ===== 404 タイピングアニメーション ===== */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* 未入力の文字は透明にして、完成時のレイアウトを先に確保する(ガタつき防止) */
+    .typing-pending {
+      color: transparent;
+      user-select: none;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      position: relative;
+      width: 0;
+    }
+
+    .typing-cursor::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -0.85em;
+      width: 2px;
+      height: 1.1em;
+      background: var(--text);
+      animation: typing-blink 1s steps(1) infinite;
+    }
+
+    @keyframes typing-blink {
+      0%, 49%   { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* JSが有効なときだけ、ボタンを最初は隠して最後にふわっと出す */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .typing-cursor::after { animation: none; }
+      .js .reveal { transition: none; }
+    }
+  </style>
 </head>
 <body>
   <div class="app">
@@ -34,10 +96,10 @@
         </header>
 
         <section class="card">
-          <h2>404 — Not Found</h2>
-          <p>申し訳ありません。お探しのページは見つかりませんでした。</p>
-          <p>ページが移動したか、削除された可能性があります。</p>
-          <p><a class="btn" href="/index.html">ホームへ戻る</a></p>
+          <h2 data-typing>404 — Not Found</h2>
+          <p data-typing>申し訳ありません。お探しのページは見つかりませんでした。</p>
+          <p data-typing>ページが移動したか、削除された可能性があります。</p>
+          <p class="reveal"><a class="btn" href="/index.html">ホームへ戻る</a></p>
         </section>
 
         <section class="card">
@@ -60,5 +122,86 @@
       </footer>
     </div>
   </div>
+
+  <script>
+  (function () {
+    var targets = Array.prototype.slice.call(document.querySelectorAll('[data-typing]'));
+    var reveal = document.querySelector('.reveal');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function showButton() {
+      if (reveal) reveal.classList.add('is-visible');
+    }
+
+    // 動きを減らす設定のときは、タイピングせず即表示
+    if (reduceMotion || targets.length === 0) {
+      showButton();
+      return;
+    }
+
+    var CHAR_DELAY = 55;    // 1文字あたりの待ち時間(ms)
+    var PUNCT_DELAY = 350;  // 「。」「…」「—」の後の間
+    var LINE_DELAY = 450;   // 行と行の間
+
+    // 各要素を「読み上げ用の全文」+「見た目用の3つのspan」に組み替える
+    var lines = targets.map(function (el) {
+      var full = el.textContent;
+      el.textContent = '';
+
+      var sr = document.createElement('span');
+      sr.className = 'sr-only';
+      sr.textContent = full;
+
+      var visual = document.createElement('span');
+      visual.setAttribute('aria-hidden', 'true');
+
+      var typed = document.createElement('span');
+      var cursor = document.createElement('span');
+      cursor.className = 'typing-cursor';
+      var pending = document.createElement('span');
+      pending.className = 'typing-pending';
+      pending.textContent = full;
+
+      visual.appendChild(typed);
+      visual.appendChild(cursor);
+      visual.appendChild(pending);
+      el.appendChild(sr);
+      el.appendChild(visual);
+
+      return { full: full, typed: typed, cursor: cursor, pending: pending };
+    });
+
+    // 最初は全行のカーソルを外しておく
+    lines.forEach(function (l) { l.cursor.style.display = 'none'; });
+
+    function typeLine(index) {
+      if (index >= lines.length) {
+        setTimeout(showButton, 500);
+        return;
+      }
+
+      var line = lines[index];
+      var chars = Array.from(line.full); // サロゲートペア対策
+      var i = 0;
+
+      if (index > 0) lines[index - 1].cursor.style.display = 'none';
+      line.cursor.style.display = '';
+
+      (function step() {
+        if (i >= chars.length) {
+          setTimeout(function () { typeLine(index + 1); }, LINE_DELAY);
+          return;
+        }
+        var ch = chars[i++];
+        line.typed.textContent += ch;
+        line.pending.textContent = chars.slice(i).join('');
+        var wait = /[。…—、]/.test(ch) ? PUNCT_DELAY : CHAR_DELAY;
+        setTimeout(step, wait);
+      })();
+    }
+
+    setTimeout(function () { typeLine(0); }, 400);
+  })();
+  </script>
 </body>
 </html>
