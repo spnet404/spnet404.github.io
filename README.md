@@ -10,7 +10,7 @@
 - 運営者：spnet_404
 - サイト開設時期：2024年の中ごろ
 - トップページの容量：6KB
-- 使用している技術：HTML, JavaScript, CSS, JSON, 埋め込みサービス「BlueSkyTimeline」
+- 使用している技術：HTML, JavaScript, CSS, JSON, 埋め込みサービス「BlueSkyTimeline」, 埋め込みサービス「FC2カウンター」
 
 ## 発信しているコンテンツ
 
@@ -62,7 +62,11 @@
 
 このサイトでは、自分のBlueSkyのタイムラインを埋め込むために外部のサービスを使用しています。このサービスでは、改善・分析のためにGoogle Analyticsを用いているとのことです。
 
-- [埋め込みサービスの公式サイト](https://blueskytimeline.com/jp/)
+- [BlueSkyTimeline公式サイト](https://blueskytimeline.com/jp/)
+
+また、アクセス解析のためにFC2カウンターを使用しています。広告ブロッカーを導入している場合、追跡ソフトの要素としてFC2カウンターをブロックする事があります。
+
+- [FC2カウンター公式サイト](https://counter.fc2.com/)
 
 ## サイトを作成するにあたって使用した生成AI
 
