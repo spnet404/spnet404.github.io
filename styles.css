@@ -1,6 +1,7 @@
 @import url('https://unpkg.com/ress/dist/ress.min.css');
 
 :root {
+  color-scheme: light;
   --bg: #f5f3ee;
   --bg-soft: #fcfbf7;
   --panel: #ffffff;
@@ -919,5 +920,73 @@ footer {
 
   .lanyard-embed {
     max-width: 100%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #17191b;
+    --bg-soft: #202326;
+    --panel: #25282b;
+    --surface: #292c2f;
+    --text: #f1f0eb;
+    --muted: #b8b5ad;
+    --accent: #e8e5dc;
+    --accent-soft: #3a3d40;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.24);
+    --glass: rgba(255, 255, 255, 0.04);
+    --code-bg: #25282b;
+    --code-text: #f1f0eb;
+    --blockquote-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(35, 38, 41, 0.68);
+    --glass-bg-soft: rgba(35, 38, 41, 0.5);
+    --glass-bg-hover: rgba(53, 56, 59, 0.82);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-highlight: rgba(255, 255, 255, 0.14);
+    --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    --glass-inset: inset 0 1px 0 var(--glass-highlight), inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+  }
+
+  body::before {
+    background:
+      radial-gradient(circle at 12% 10%, rgba(119, 74, 46, 0.2), transparent 38%),
+      radial-gradient(circle at 88% 18%, rgba(61, 88, 125, 0.22), transparent 40%),
+      radial-gradient(circle at 70% 88%, rgba(58, 95, 67, 0.2), transparent 42%),
+      radial-gradient(circle at 20% 80%, rgba(103, 65, 98, 0.18), transparent 40%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 60%);
+  }
+
+  .btn {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  }
+
+  .btn:hover {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08));
+  }
+
+  .card::after {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 38%);
+  }
+
+  .status-badge.available {
+    background: rgba(232, 229, 220, 0.12);
+  }
+
+  .status-bar {
+    background: rgba(232, 229, 220, 0.12);
+  }
+
+  .status-bar-fill {
+    background: linear-gradient(90deg, #d8d4ca, #a9a69f);
+  }
+
+  blockquote {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .article-container {
+    background: rgba(35, 38, 41, 0.82);
   }
 }
